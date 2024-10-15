@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Whoops\Run;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('dashboard.index');
+})->name('dashboard');
+
+Route::get('/kelas_mendatang', function () {
+    return view('dashboard.kelas_mendatang');
+})->name('kelas_mendatang');
+
+Route::get('/jadwal_kuliah', function () {
+    return view('dashboard.jadwal_kuliah');
+})->name('jadwal_kuliah');
