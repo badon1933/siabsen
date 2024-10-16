@@ -3,9 +3,9 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>AdminLTE 4 | Sidebar Mini</title><!--begin::Primary Meta Tags-->
+    <title>AdminLTE 4 | Login Page v2</title><!--begin::Primary Meta Tags-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="title" content="AdminLTE 4 | Sidebar Mini">
+    <meta name="title" content="AdminLTE 4 | Login Page v2">
     <meta name="author" content="ColorlibHQ">
     <meta name="description"
         content="AdminLTE is a Free Bootstrap 5 Admin Dashboard, 30 example pages using Vanilla JS.">
@@ -22,28 +22,12 @@
         integrity="sha256-Qsx5lrStHZyR9REqhUF8iQt73X06c8LGIUPzpOhwRrI=" crossorigin="anonymous">
     <!--end::Third Party Plugin(Bootstrap Icons)--><!--begin::Required Plugin(AdminLTE)-->
     <link href="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0-beta2/dist/css/adminlte.min.css" rel="stylesheet">
+    <!--end::Required Plugin(AdminLTE)-->
 </head> <!--end::Head--> <!--begin::Body-->
 
-<body class="layout-fixed sidebar-expand-lg sidebar-mini bg-body-tertiary"> <!--begin::App Wrapper-->
-    <div class="app-wrapper"> <!--begin::Header-->
-        <x-navigation :$user />
-        <x-sidebar />
-        <main class="app-main"> <!--begin::App Content Header-->
-            @yield('content')
-        </main> <!--end::App Main--> <!--begin::Footer-->
-        <footer class="app-footer"> <!--begin::To the end-->
-            <div class="float-end d-none d-sm-inline">
-                Template by
-                <a href="https://adminlte.io" class="text-decoration-none">AdminLTE.io</a>
-            </div> <!--end::To the end-->
-            <!--begin::Copyright--> <strong>
-                Copyright &copy; 2024&nbsp;
-                Politeknik Bhakti Asih Purwakarta.
-            </strong>
-            All rights reserved.
-            <!--end::Copyright-->
-        </footer> <!--end::Footer-->
-    </div> <!--end::App Wrapper--> <!--begin::Script--> <!--begin::Third Party Plugin(OverlayScrollbars)-->
+<body class="login-page bg-body-secondary">
+    @yield('content')
+    <!-- /.login-box --> <!--begin::Third Party Plugin(OverlayScrollbars)-->
     <script src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.3.0/browser/overlayscrollbars.browser.es6.min.js"
         integrity="sha256-H2VM7BKda+v2Z4+DRy69uknwxjyDRhszjXFhsL4gD3w=" crossorigin="anonymous"></script>
     <!--end::Third Party Plugin(OverlayScrollbars)--><!--begin::Required Plugin(popperjs for Bootstrap 5)-->
@@ -53,8 +37,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
         integrity="sha256-YMa+wAM6QkVyz999odX7lPRxkoYAan8suedu4k2Zur8=" crossorigin="anonymous"></script> <!--end::Required Plugin(Bootstrap 5)--><!--begin::Required Plugin(AdminLTE)-->
     <script src="
-                                                                                    https://cdn.jsdelivr.net/npm/admin-lte@4.0.0-beta2/dist/js/adminlte.min.js
-                                                                                    "></script>
+                    https://cdn.jsdelivr.net/npm/admin-lte@4.0.0-beta2/dist/js/adminlte.min.js
+                    "></script> <!--end::Required Plugin(AdminLTE)--><!--begin::OverlayScrollbars Configure-->
     <script>
         const SELECTOR_SIDEBAR_WRAPPER = ".sidebar-wrapper";
         const Default = {

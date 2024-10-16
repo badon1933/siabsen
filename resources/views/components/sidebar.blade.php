@@ -41,6 +41,21 @@
                             class="nav-icon bi bi-palette"></i>
                         <p>Jadwal Kuliah</p>
                     </a> </li>
+                <li class="nav-header text-uppercase">Pengaturan Akun</li>
+                <li class="nav-item"> <a href="{{ route('pengaturan_akun') }}" class="nav-link"> <i
+                            class="nav-icon bi bi-person-fill-gear"></i>
+                        <p>Pengaturan Akun</p>
+                    </a> </li>
+                <li class="nav-item">
+                    <a href="{{ route('logout') }}" class="nav-link"
+                        onclick="event.preventDefault();document.getElementById('sidebar-logout').submit();">
+                        <i class="nav-icon bi bi-box-arrow-left"></i>
+                        <p>Logout</p>
+                    </a>
+                    <form action="{{ route('logout') }}" method="post" id="sidebar-logout">
+                        @csrf
+                    </form>
+                </li>
                 <li class="nav-item"> <a href="../generate/theme.html" class="nav-link"> <i
                             class="nav-icon bi bi-palette"></i>
                         <p>Theme Generate</p>
