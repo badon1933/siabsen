@@ -22,19 +22,53 @@
                         </ul>
                     @endif
                     <div class="input-group mb-1">
-                        <div class="form-floating"> <input id="registerFullName" type="text" class="form-control"
-                                placeholder="" name="name"> <label for="registerFullName">Full Name</label> </div>
+                        <div class="form-floating"> <input id="registerFullName" type="text"
+                                class="form-control @error('name') is-invalid @enderror" placeholder="" name="name">
+                            <label for="registerFullName">Full Name</label>
+                        </div>
                         <div class="input-group-text"> <span class="bi bi-person"></span> </div>
+                        @error('name')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="input-group mb-1">
-                        <div class="form-floating"> <input id="registerEmail" type="email" class="form-control"
-                                placeholder="" name="email"> <label for="registerEmail">Email</label> </div>
+                        <div class="form-floating"> <input id="registerEmail" type="email"
+                                class="form-control @error('email') is-invalid @enderror" placeholder="" name="email">
+                            <label for="registerEmail">Email</label>
+                        </div>
                         <div class="input-group-text"> <span class="bi bi-envelope"></span> </div>
+                        @error('email')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="input-group mb-1">
-                        <div class="form-floating"> <input id="registerPassword" type="password" class="form-control"
-                                placeholder="" name="password"> <label for="registerPassword">Password</label> </div>
+                        <div class="form-floating"> <input id="registerPassword" type="password"
+                                class="form-control @error('password') is-invalid @enderror" placeholder="" name="password">
+                            <label for="registerPassword">Password</label>
+                        </div>
                         <div class="input-group-text"> <span class="bi bi-lock-fill"></span> </div>
+                        @error('password')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="input-group mb-1">
+                        <div class="form-floating"> <input id="password_confirmation" type="password"
+                                class="form-control @error('password_confirmation') is-invalid @enderror" placeholder=""
+                                name="password_confirmation">
+                            <label for="password_confirmation">Ulangi Password</label>
+                        </div>
+                        <div class="input-group-text"> <span class="bi bi-lock-fill"></span> </div>
+                        @error('password_confirmation')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
 
                     <div class="d-grid my-3">
