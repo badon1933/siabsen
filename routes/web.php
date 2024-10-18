@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\UpdatePasswordController;
 use Whoops\Run;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +42,8 @@ Route::middleware(['auth'])->group(function () {
             'user' => Auth::user()
         ]);
     })->name('pengaturan_akun');
+
+    Route::post('/update_password', [UpdatePasswordController::class, 'update_password'])->name('update_password');
 });
 
 Auth::routes();
