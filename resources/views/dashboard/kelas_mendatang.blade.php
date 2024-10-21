@@ -216,7 +216,7 @@
                 </div>
             </div> <!--end::Row-->
         </div> <!--end::Container-->
-        <x-modal modal-id="absenMasukModal" modal-title="Absen Masuk">
+        <x-modal modal-id="absenMasukModal" modal-title="Absen Masuk" modal-type="form" form-action="absen.store">
             {{-- webcamJS --}}
             <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
 
@@ -254,12 +254,12 @@
                 }
             </style>
             <div class="d-grid">
-                <button class="btn btn-danger" id="tombolAbsenFoto">
+                <button type="button" class="btn btn-danger" id="tombolAbsenFoto">
                     <i class="bi bi-camera-fill"></i>
                     Foto
                 </button>
                 <p class="my-2 text-center" id="tulisanAtau">atau</p>
-                <button class="btn btn-success" id="tombolAbsenLokasi">
+                <button type="button" class="btn btn-success" id="tombolAbsenLokasi">
                     <i class="bi bi-geo-alt-fill"></i>
                     Lokasi
                 </button>
@@ -268,9 +268,9 @@
             <div class="my-2 text-center" id="webcamContainer">
                 <div id="webcam" class="webcamCapture"></div>
                 <div id="webcam_result" class="webcamCapture"></div>
-                <a href="javascript:void(take_snapshot())" id="tombolAmbilFoto" class="btn btn-primary my-2">
+                <button type="button" id="tombolAmbilFoto" class="btn btn-primary my-2">
                     Ambil Foto
-                </a>
+                </button>
             </div>
 
             <div class="my-2" id="mapContainer">
@@ -282,7 +282,7 @@
             <script language="JavaScript">
                 /* Absen Kamera */
                 Webcam.set({
-                    height: 320,
+                    height: 300,
                     width: 400,
                     image_format: 'jpeg',
                     jpeg_quality: 80

@@ -14,6 +14,8 @@ class modal extends Component
     public function __construct(
         public $modalTitle,
         public $modalId,
+        public $modalType,
+        public $formAction,
         // public $submitBtnName
     ) {
         //

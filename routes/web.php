@@ -45,6 +45,8 @@ Route::middleware(['auth'])->group(function () {
         ]);
     })->name('pengaturan_akun');
 
+    Route::post('/absen/store', function () {})->name('absen.store');
+
     Route::post('/update_password', [UpdatePasswordController::class, 'update_password'])->name('update_password');
 });
 
