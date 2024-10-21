@@ -37,7 +37,7 @@
                         </div> <!-- /.card-body -->
                         <div class="card-footer d-grid">
                             <x-modal-button btn-type="primary" target-modal="absenMasukModal">
-                                Terlambat
+                                Absen Masuk
                             </x-modal-button>
                         </div> <!-- /.card-footer-->
                     </div> <!-- /.card -->
@@ -213,15 +213,135 @@
                             <button class="btn btn-info" disabled>Izin</button>
                         </div> <!-- /.card-footer-->
                     </div> <!-- /.card -->
-                    <x-modal modal-id="absenMasukModal" modal-title="Absen Masuk">
-                        <div class="d-grid">
-                            <button class="btn btn-danger">Ambil Foto</button>
-                            <p class="my-2 text-center">atau</p>
-                            <button class="btn btn-success">Ambil Lokasi</button>
-                        </div>
-                    </x-modal>
                 </div>
             </div> <!--end::Row-->
         </div> <!--end::Container-->
+        <x-modal modal-id="absenMasukModal" modal-title="Absen Masuk">
+            {{-- webcamJS --}}
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
+
+            {{-- leafletJS --}}
+            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+            <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+            <style>
+                #webcamContainer {
+                    display: none;
+                }
+
+                .toggleCamera {
+                    display: block !important;
+                }
+
+                .webcamCapture,
+                .webcamCapture video,
+                .webcamCapture img {
+                    display: inline-block;
+                    width: 100% !important;
+                    height: 100% !important;
+                }
+
+                #mapContainer {
+                    display: none;
+                }
+
+                #map {
+                    height: 200px;
+                }
+
+                .toggleMap {
+                    display: block !important;
+                }
+            </style>
+            <div class="d-grid">
+                <button class="btn btn-danger" id="tombolAbsenFoto">
+                    <i class="bi bi-camera-fill"></i>
+                    Foto
+                </button>
+                <p class="my-2 text-center" id="tulisanAtau">atau</p>
+                <button class="btn btn-success" id="tombolAbsenLokasi">
+                    <i class="bi bi-geo-alt-fill"></i>
+                    Lokasi
+                </button>
+            </div>
+
+            <div class="my-2 text-center" id="webcamContainer">
+                <div id="webcam" class="webcamCapture"></div>
+                <div id="webcam_result" class="webcamCapture"></div>
+                <a href="javascript:void(take_snapshot())" id="tombolAmbilFoto" class="btn btn-primary my-2">
+                    Ambil Foto
+                </a>
+            </div>
+
+            <div class="my-2" id="mapContainer">
+                <input type="hidden" id="lokasi" name="lokasi">
+                <div id="map">
+                </div>
+            </div>
+
+            <script language="JavaScript">
+                /* Absen Kamera */
+                Webcam.set({
+                    height: 320,
+                    width: 400,
+                    image_format: 'jpeg',
+                    jpeg_quality: 80
+                })
+
+                const webcamContainer = document.getElementById('webcamContainer');
+                const webcam = document.getElementById('webcam');
+                const webcam_result = document.getElementById('webcam_result');
+                const tombolAmbilFoto = document.getElementById('tombolAmbilFoto');
+                const tombolAbsenFoto = document.getElementById('tombolAbsenFoto');
+
+                tombolAbsenFoto.addEventListener('click', function() {
+                    Webcam.attach('#webcam')
+                    webcamContainer.classList.toggle('toggleCamera')
+                })
+
+                tombolAmbilFoto.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    Webcam.snap(function(data_uri) {
+                        document.getElementById('webcam_result').innerHTML = '<img src="' + data_uri + '"/>';
+                    });
+                })
+
+                /* Absen Lokasi */
+
+                let lokasi = document.getElementById('lokasi')
+                const mapContainer = document.getElementById('mapContainer');
+                const tombolAbsenLokasi = document.getElementById('tombolAbsenLokasi');
+                const map = document.getElementById('map');
+
+                tombolAbsenLokasi.addEventListener('click', function() {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+                    }
+                    mapContainer.classList.toggle('toggleMap')
+                })
+
+                function successCallback(position) {
+                    lokasi.value = position.coords.latitude + ', ' + position.coords.longitude
+                    let map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 13)
+                    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        maxZoom: 19,
+                        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                    }).addTo(map);
+
+                    let marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+
+                    var circle = L.circle([-6.520432989689656, 107.44896262887767], {
+                        color: 'red',
+                        fillColor: '#f03',
+                        fillOpacity: 0.5,
+                        radius: 250
+                    }).addTo(map);
+                }
+
+                function errorCallback() {
+                    alert('Sepertinya ada masalah, silakan gunakan metode absen yang lain.')
+                }
+            </script>
+        </x-modal>
     </div> <!--end::App Content-->
 @endsection

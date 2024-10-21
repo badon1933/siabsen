@@ -17,6 +17,8 @@ use App\Http\Controllers\HomeController;
 |
 */
 
+Route::redirect('/', '/login', 301);
+
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard', function () {
