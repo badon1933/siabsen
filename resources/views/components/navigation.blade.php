@@ -103,7 +103,8 @@
                             {{ $user->name }} - Administrator
                         </p>
                     </li> <!--end::User Image--> <!--begin::Menu Body-->
-                    <li class="user-footer"> <a href="#" class="btn btn-default btn-flat">Profile</a>
+                    <li class="user-footer"> <a href="{{ route('pengaturan_akun') }}"
+                            class="btn btn-default btn-flat">Profile</a>
                         <form action="{{ route('logout') }}" method="post" class="d-inline">
                             @csrf
                             <button type="submit" class="btn btn-default btn-flat float-end">
