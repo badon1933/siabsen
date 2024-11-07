@@ -60,7 +60,20 @@ class ProgramStudiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'kode_prodi' => 'required',
+            'jenjang' => 'required'
+        ]);
+
+        ProgramStudi::where(['id' => $id])
+            ->update([
+                'nama' => $request->nama,
+                'kode_prodi' => $request->kode_prodi,
+                'jenjang' => $request->jenjang,
+            ]);
+
+        return redirect()->route('program_studi.index');
     }
 
     /**
@@ -68,6 +81,7 @@ class ProgramStudiController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        ProgramStudi::destroy($id);
+        return redirect()->route('program_studi.index');
     }
 }

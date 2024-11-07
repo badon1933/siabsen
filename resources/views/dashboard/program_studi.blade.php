@@ -40,17 +40,14 @@
                                                         data-bs-title="Detail mahasiswa">
                                                         <i class="bi bi-info-circle"></i>
                                                     </a href="#">
-                                                    <a href="#" class="badge text-bg-warning d-inline-block"
-                                                        data-bs-toggle="tooltip" data-bs-placement="top"
-                                                        data-bs-title="Edit mahasiswa">
+                                                    <x-modal-trigger type="badge" color="warning"
+                                                        target-modal="editProdi_{{ $item->id }}">
                                                         <i class="bi bi-pencil-square"></i>
-                                                    </a href="#">
-                                                    <a href="#" class="badge text-bg-danger d-inline-block"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="deleteProdi_{{ $item->id }}"
-                                                        data-bs-title="Hapus ahasiswa">
+                                                    </x-modal-trigger>
+                                                    <x-modal-trigger type="badge" color="danger"
+                                                        target-modal="deleteProdi_{{ $item->id }}">
                                                         <i class="bi bi-trash-fill"></i>
-                                                    </a href="#">
+                                                    </x-modal-trigger>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -62,7 +59,10 @@
                 </div>
             </div> <!--end::Row-->
         </div> <!--end::Container-->
-        <x-modal modal-id="tambahProdiModal" modal-title="Tambah Prodi" modal-type="form" form-action="program_studi.store">
+
+        {{-- Modal Tambah Prodi --}}
+        <x-modal-form modal-id="tambahProdiModal" modal-title="Tambah Prodi" modal-type="form"
+            form-action="program_studi.store" spoof-method="" params="">
             <div class="form-floating my-1">
                 <input type="text" class="form-control" id="nama" name="nama">
                 <label for="nama">Nama prodi</label>
@@ -81,11 +81,41 @@
                 </select>
                 <label for="jenjang">Pilih Jenjang</label>
             </div>
-        </x-modal>
+        </x-modal-form>
+
+        {{-- Modal Edit Prodi --}}
+        @foreach ($program_studi as $item)
+            <x-modal-form modal-id="editProdi_{{ $item->id }}" modal-title="Tambah Prodi" modal-type="form"
+                form-action="program_studi.update" spoof-method="PATCH" params="{{ $item->id }}">
+                <div class="form-floating my-1">
+                    <input type="text" class="form-control" id="nama" name="nama" value="{{ $item->nama }}">
+                    <label for="nama">Nama prodi</label>
+                </div>
+                <div class="form-floating my-1">
+                    <input type="text" class="form-control" id="kode_prodi" name="kode_prodi"
+                        value="{{ $item->kode_prodi }}">
+                    <label for="kode_prodi">Kode prodi</label>
+                </div>
+                <div class="form-floating my-1">
+                    <select class="form-select" id="jenjang" name="jenjang" aria-label="Floating label select example">
+                        <option value="" style="display: none"></option>
+                        <option value="D3">D3</option>
+                        <option value="S1">DIV</option>
+                        <option value="S1">S1</option>
+                        <option value="Profesi">Profesi</option>
+                    </select>
+                    <label for="jenjang">Pilih Jenjang</label>
+                </div>
+            </x-modal-form>
+        @endforeach
+
         @foreach ($program_studi as $item)
             <x-modal-deletion modal-id="deleteProdi_{{ $item->id }}" form-action="program_studi.destroy"
                 param="{{ $item->id }}">
-                Apakah anda yakin ingin menghapus data ini? data yang sudah dihapus tidak dapat dikembalikan lagi.
+                <p>Apakah anda yakin ingin menghapus data ini?</p>
+                <small class="text-danger">
+                    Data yang sudah dihapus tidak dapat dikembalikan lagi.
+                </small>
             </x-modal-deletion>
         @endforeach
     </div> <!--end::App Content-->

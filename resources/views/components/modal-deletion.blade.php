@@ -10,8 +10,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="{{ route($formAction, $param) }}" method="post">
+                @method('delete')
                 @csrf
-                <div class="modal-body">
+                <div class="modal-body text-center">
                     {{ $slot }}
                 </div>
                 <div class="modal-footer">
