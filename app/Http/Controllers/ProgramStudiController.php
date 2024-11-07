@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jenjang;
+use App\Models\ProgramStudi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\ProgramStudi;
 
 class ProgramStudiController extends Controller
 {
@@ -16,6 +17,7 @@ class ProgramStudiController extends Controller
         return view('dashboard.program_studi', [
             'user' => Auth::user(),
             'program_studi' => ProgramStudi::all(),
+            'jenjang' => Jenjang::all(),
         ]);
     }
 
@@ -27,13 +29,13 @@ class ProgramStudiController extends Controller
         $request->validate([
             'nama' => 'required',
             'kode_prodi' => 'required',
-            'jenjang' => 'required'
+            'jenjang_id' => 'required'
         ]);
 
         ProgramStudi::create([
             'nama' => $request->nama,
             'kode_prodi' => $request->kode_prodi,
-            'jenjang' => $request->jenjang,
+            'jenjang_id' => $request->jenjang_id,
         ]);
 
         return redirect()->route('program_studi.index');
@@ -63,14 +65,14 @@ class ProgramStudiController extends Controller
         $request->validate([
             'nama' => 'required',
             'kode_prodi' => 'required',
-            'jenjang' => 'required'
+            'jenjang_id' => 'required'
         ]);
 
         ProgramStudi::where(['id' => $id])
             ->update([
                 'nama' => $request->nama,
                 'kode_prodi' => $request->kode_prodi,
-                'jenjang' => $request->jenjang,
+                'jenjang_id' => $request->jenjang_id,
             ]);
 
         return redirect()->route('program_studi.index');

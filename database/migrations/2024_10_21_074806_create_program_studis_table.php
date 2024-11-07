@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('program_studis', function (Blueprint $table) {
-            $table->ulid('id');
+            $table->ulid('id')->primary();
             $table->string('nama');
             $table->integer('kode_prodi')->unique();
-            $table->string('jenjang');
+            $table->foreignUlid('jenjang_id')->constrained();
             $table->timestamps();
         });
     }

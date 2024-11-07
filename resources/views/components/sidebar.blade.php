@@ -41,6 +41,19 @@
                             class="nav-icon bi bi-calendar3"></i>
                         <p>Jadwal Kuliah</p>
                     </a> </li>
+                <li class="nav-header text-uppercase">Master Data</li>
+                <li class="nav-item"> <a href="{{ route('jenjang.index') }}" class="nav-link"> <i
+                            class="nav-icon bi bi-mortarboard-fill"></i>
+                        <p>Data Jenjang</p>
+                    </a> </li>
+                <li class="nav-item"> <a href="{{ route('program_studi.index') }}" class="nav-link"> <i
+                            class="nav-icon bi bi-easel2-fill"></i>
+                        <p>Data Program Studi</p>
+                    </a> </li>
+                <li class="nav-item"> <a href="{{ route('data_mahasiswa') }}" class="nav-link"> <i
+                            class="nav-icon bi bi-people-fill"></i>
+                        <p>Data Mahasiswa</p>
+                    </a> </li>
                 <li class="nav-header text-uppercase">Pengaturan Akun</li>
                 <li class="nav-item"> <a href="{{ route('pengaturan_akun') }}" class="nav-link"> <i
                             class="nav-icon bi bi-person-fill-gear"></i>
@@ -56,19 +69,6 @@
                         @csrf
                     </form>
                 </li>
-                <li class="nav-header text-uppercase">Master Data</li>
-                <li class="nav-item"> <a href="{{ route('jenjang.index') }}" class="nav-link"> <i
-                            class="nav-icon bi bi-mortarboard-fill"></i>
-                        <p>Data Jenjang</p>
-                    </a> </li>
-                <li class="nav-item"> <a href="{{ route('program_studi.index') }}" class="nav-link"> <i
-                            class="nav-icon bi bi-easel2-fill"></i>
-                        <p>Data Program Studi</p>
-                    </a> </li>
-                <li class="nav-item"> <a href="{{ route('data_mahasiswa') }}" class="nav-link"> <i
-                            class="nav-icon bi bi-people-fill"></i>
-                        <p>Data Mahasiswa</p>
-                    </a> </li>
                 <li class="nav-item"> <a href="../generate/theme.html" class="nav-link"> <i
                             class="nav-icon bi bi-palette"></i>
                         <p>Theme Generate</p>
