@@ -5,6 +5,7 @@ use Whoops\Run;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JenjangController;
 use App\Http\Controllers\ProgramStudiController;
 
 /*
@@ -56,6 +57,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('program_studi', ProgramStudiController::class)->except([
         'create'
+    ]);
+
+    Route::resource('jenjang', JenjangController::class)->except([
+        'create',
+        'edit'
     ]);
 
     Route::post('/update_password', [UpdatePasswordController::class, 'update_password'])->name('update_password');

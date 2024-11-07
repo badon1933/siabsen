@@ -57,6 +57,10 @@
                     </form>
                 </li>
                 <li class="nav-header text-uppercase">Master Data</li>
+                <li class="nav-item"> <a href="{{ route('jenjang.index') }}" class="nav-link"> <i
+                            class="nav-icon bi bi-mortarboard-fill"></i>
+                        <p>Data Jenjang</p>
+                    </a> </li>
                 <li class="nav-item"> <a href="{{ route('program_studi.index') }}" class="nav-link"> <i
                             class="nav-icon bi bi-easel2-fill"></i>
                         <p>Data Program Studi</p>
