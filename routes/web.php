@@ -5,6 +5,7 @@ use Whoops\Run;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProgramStudiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,16 @@ Route::middleware(['auth'])->group(function () {
     })->name('pengaturan_akun');
 
     Route::post('/absen/store', function () {})->name('absen.store');
+
+    Route::get('/data_mahasiswa', function () {
+        return view('dashboard.data_mahasiswa', [
+            'user' => Auth::user()
+        ]);
+    })->name('data_mahasiswa');
+
+    Route::resource('program_studi', ProgramStudiController::class)->except([
+        'create'
+    ]);
 
     Route::post('/update_password', [UpdatePasswordController::class, 'update_password'])->name('update_password');
 });

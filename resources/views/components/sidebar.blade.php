@@ -56,6 +56,15 @@
                         @csrf
                     </form>
                 </li>
+                <li class="nav-header text-uppercase">Master Data</li>
+                <li class="nav-item"> <a href="{{ route('program_studi.index') }}" class="nav-link"> <i
+                            class="nav-icon bi bi-easel2-fill"></i>
+                        <p>Data Program Studi</p>
+                    </a> </li>
+                <li class="nav-item"> <a href="{{ route('data_mahasiswa') }}" class="nav-link"> <i
+                            class="nav-icon bi bi-people-fill"></i>
+                        <p>Data Mahasiswa</p>
+                    </a> </li>
                 <li class="nav-item"> <a href="../generate/theme.html" class="nav-link"> <i
                             class="nav-icon bi bi-palette"></i>
                         <p>Theme Generate</p>
