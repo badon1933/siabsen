@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Absensi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class AbsensiController extends Controller
@@ -28,16 +31,37 @@ class AbsensiController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'image' => 'required_without:location',
+            'location' => 'required_without:image',
+        ]);
+
+        $data = [
+            'user_id' => Auth::user()->id,
+            'status' => '1'
+        ];
+
         if ($request->input('image')) {
             $image = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $request->input('image')));
             $image_name = uniqid() . '.jpeg';
             $upload = Storage::disk('local')->put("public/absensi/masuk/$image_name", $image);
             if ($upload) {
-                return redirect()->route('kelas_mendatang')->with('success', 'Absen berhasil dicatat!');
+                $data += [
+                    'image' => 'storage/absensi/masuk' . $image_name,
+                ];
             } else {
-                return redirect()->route('kelas_mendatang')->with('failed', 'Gagal absen, gunakan cara absen yang lain.');
+                return redirect()->route('kelas_mendatang')->with('failed', 'Gagal absen, gunakan metode absen yang lain.');
             }
         }
+
+        if ($request->input('location')) {
+            $data += [
+                'location' => $request->input('location')
+            ];
+        }
+
+        Absensi::create($data);
+        return redirect()->route('kelas_mendatang')->with('success', 'Absen berhasil dicatat!');
     }
 
     /**

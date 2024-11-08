@@ -264,12 +264,13 @@
                 }
             </style>
             <div class="d-grid">
-                <button type="button" class="btn btn-danger" id="tombolAbsenFoto">
+                <p class="text-center" id="tulisanAtau">Pilih salah satu</p>
+                <button type="button" class="btn btn-primary" id="tombolAbsenFoto">
                     <i class="bi bi-camera-fill"></i>
                     Foto
                 </button>
                 <p class="my-2 text-center" id="tulisanAtau">atau</p>
-                <button type="button" class="btn btn-success" id="tombolAbsenLokasi">
+                <button type="button" class="btn btn-secondary" id="tombolAbsenLokasi">
                     <i class="bi bi-geo-alt-fill"></i>
                     Lokasi
                 </button>
@@ -284,12 +285,12 @@
             </div>
 
             <div class="my-2" id="mapContainer">
-                <input type="hidden" id="lokasi" name="lokasi">
                 <div id="map">
                 </div>
             </div>
 
             <input type="hidden" class="image" name="image" id="image">
+            <input type="hidden" id="location" name="location">
 
             <script language="JavaScript">
                 /* Absen Kamera */
@@ -322,7 +323,7 @@
 
                 /* Absen Lokasi */
 
-                let lokasi = document.getElementById('lokasi')
+                let lokasi = document.getElementById('location')
                 const mapContainer = document.getElementById('mapContainer');
                 const tombolAbsenLokasi = document.getElementById('tombolAbsenLokasi');
                 const map = document.getElementById('map');
