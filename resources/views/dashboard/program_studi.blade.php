@@ -98,10 +98,9 @@
                 <div class="form-floating my-1">
                     <select class="form-select" id="jenjang" name="jenjang" aria-label="Floating label select example">
                         <option value="" style="display: none"></option>
-                        <option value="D3">D3</option>
-                        <option value="S1">DIV</option>
-                        <option value="S1">S1</option>
-                        <option value="Profesi">Profesi</option>
+                        @foreach ($jenjang as $item)
+                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                        @endforeach
                     </select>
                     <label for="jenjang">Pilih Jenjang</label>
                 </div>

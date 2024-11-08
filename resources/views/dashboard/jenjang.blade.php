@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <x-content_header page-title="Data Program Studi" />
+    <x-content_header page-title="Data Jenjang" />
 
     <div class="app-content"> <!--begin::Container-->
         <div class="container-fluid"> <!--begin::Row-->
