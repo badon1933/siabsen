@@ -1,10 +1,9 @@
 <?php
 
+use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\Auth\UpdatePasswordController;
-use Whoops\Run;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JenjangController;
 use App\Http\Controllers\ProgramStudiController;
 
@@ -47,13 +46,14 @@ Route::middleware(['auth'])->group(function () {
         ]);
     })->name('pengaturan_akun');
 
-    Route::post('/absen/store', function () {})->name('absen.store');
 
     Route::get('/data_mahasiswa', function () {
         return view('dashboard.data_mahasiswa', [
             'user' => Auth::user()
         ]);
     })->name('data_mahasiswa');
+
+    Route::resource('absen', AbsensiController::class);
 
     Route::resource('program_studi', ProgramStudiController::class)->except([
         'create'

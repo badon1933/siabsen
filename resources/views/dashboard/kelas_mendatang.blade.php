@@ -5,6 +5,16 @@
 
     <div class="app-content"> <!--begin::Container-->
         <div class="container-fluid"> <!--begin::Row-->
+            @if (session('success'))
+                <div class="alert alert-success text-center" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if (session('failed'))
+                <div class="alert alert-danger text-center" role="alert">
+                    {{ session('failed') }}
+                </div>
+            @endif
             <div class="row row-cols-md-4 row-cols-1 g-3 justify-content-center">
                 <div class="col"> <!-- Default box -->
                     <div class="card">
@@ -31,7 +41,7 @@
                                 <tr>
                                     <th>Jam Kuliah</th>
                                     <td>:</td>
-                                    <td>08.00 - 10.00</td>
+                                    <td>08.00 - 10.00 (WIB/WIT/WITA)</td>
                                 </tr>
                             </table>
                         </div> <!-- /.card-body -->
@@ -279,6 +289,8 @@
                 </div>
             </div>
 
+            <input type="hidden" class="image" name="image" id="image">
+
             <script language="JavaScript">
                 /* Absen Kamera */
                 Webcam.set({
@@ -302,7 +314,9 @@
                 tombolAmbilFoto.addEventListener('click', function(e) {
                     e.preventDefault();
                     Webcam.snap(function(data_uri) {
-                        document.getElementById('webcam_result').innerHTML = '<img src="' + data_uri + '"/>';
+                        document.getElementById('webcam_result').innerHTML = '<img class="img-fluid" src="' +
+                            data_uri + '"/>';
+                        document.getElementById('image').value = data_uri
                     });
                 })
 
