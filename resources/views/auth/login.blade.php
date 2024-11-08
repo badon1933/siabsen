@@ -30,6 +30,7 @@
                         </div>
                         <div class="input-group-text"> <span class="bi bi-lock-fill"></span> </div>
                     </div>
+                    <input type="hidden" name="timezone" id="timezone">
                     <div class="d-grid my-3">
                         <button type="submit" class="btn btn-primary">Sign in</button>
                     </div>
@@ -43,4 +44,10 @@
             </div> <!-- /.login-card-body -->
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.13/moment-timezone-with-data.js"></script>
+    <script type="text/javascript">
+        let timezone = moment.tz.guess();
+        document.getElementById('timezone').value = timezone;
+    </script>
 @endsection
