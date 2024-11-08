@@ -1,12 +1,6 @@
 @props([
     'submitBtnName' => 'Simpan',
     'closeBtnName' => 'Tutup',
-    'modalType',
-    'modalId',
-    'modalTitle',
-    'formAction',
-    'spoofMethod',
-    'params',
 ])
 
 <!-- Modal -->
@@ -19,10 +13,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             @if ($modalType == 'form')
-                <form action="{{ route($formAction, [$params]) }}" method="post">
-                    @if ($spoofMethod != null)
-                        @method($spoofMethod)
-                    @endif
+                <form action="{{ route($formAction) }}" method="post">
                     @csrf
             @endif
 

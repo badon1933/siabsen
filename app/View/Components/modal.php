@@ -16,7 +16,6 @@ class modal extends Component
         public $modalId,
         public $modalType,
         public $formAction,
-        public $params
         // public $submitBtnName
     ) {
         //
