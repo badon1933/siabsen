@@ -50,6 +50,10 @@
                             class="nav-icon bi bi-easel2-fill"></i>
                         <p>Data Program Studi</p>
                     </a> </li>
+                <li class="nav-item"> <a href="{{ route('mata_kuliah.index') }}" class="nav-link"> <i
+                            class="nav-icon bi bi-journals"></i>
+                        <p>Data Mata Kuliah</p>
+                    </a> </li>
                 <li class="nav-item"> <a href="{{ route('data_mahasiswa') }}" class="nav-link"> <i
                             class="nav-icon bi bi-people-fill"></i>
                         <p>Data Mahasiswa</p>

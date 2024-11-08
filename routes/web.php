@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\UpdatePasswordController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JenjangController;
+use App\Http\Controllers\MataKuliahController;
 use App\Http\Controllers\ProgramStudiController;
 
 /*
@@ -63,6 +64,8 @@ Route::middleware(['auth'])->group(function () {
         'create',
         'edit'
     ]);
+
+    Route::resource('mata_kuliah', MataKuliahController::class);
 
     Route::post('/update_password', [UpdatePasswordController::class, 'update_password'])->name('update_password');
 });

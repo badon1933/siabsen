@@ -6,21 +6,15 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class ProgramStudi extends Model
+class MataKuliah extends Model
 {
     use HasFactory, HasUlids;
 
     protected $guarded = [];
 
-    public function jenjang(): BelongsTo
+    public function program_studi(): BelongsTo
     {
-        return $this->belongsTo(Jenjang::class);
-    }
-
-    public function mata_kuliah(): HasMany
-    {
-        return $this->hasMany(MataKuliah::class);
+        return $this->belongsTo(ProgramStudi::class);
     }
 }
