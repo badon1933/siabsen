@@ -33,7 +33,7 @@
                             class="nav-icon bi bi-house-fill"></i>
                         <p>Dashboard</p>
                     </a> </li>
-                <li class="nav-item"> <a href="{{ route('kelas_mendatang') }}" class="nav-link"> <i
+                <li class="nav-item"> <a href="{{ route('kelas.index') }}" class="nav-link"> <i
                             class="nav-icon bi bi-calendar-week"></i>
                         <p>Kelas Mendatang</p>
                     </a> </li>
