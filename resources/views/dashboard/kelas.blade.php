@@ -77,6 +77,42 @@
                                 <tr>
                                     <th>Jam Kuliah</th>
                                     <td>:</td>
+                                    <td>08.00 - 10.00 (WIB/WIT/WITA)</td>
+                                </tr>
+                            </table>
+                        </div> <!-- /.card-body -->
+                        <div class="card-footer d-grid">
+                            <a href="{{ route('kelas.show', 1) }}" class="btn btn-primary">
+                                Lihat Kelas
+                            </a>
+                        </div> <!-- /.card-footer-->
+                    </div> <!-- /.card -->
+                </div>
+                <div class="col"> <!-- Default box -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Asuhan Kebidanan Komunitas</h3>
+                        </div>
+                        <div class="card-body">
+                            <table>
+                                <tr>
+                                    <th>Dosen Pengampu</th>
+                                    <td>:</td>
+                                    <td>
+                                        <ol>
+                                            <li>Daris Yolandasari</li>
+                                            <li>Armiyanti</li>
+                                        </ol>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Pertemuan ke</th>
+                                    <td>:</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <th>Jam Kuliah</th>
+                                    <td>:</td>
                                     <td>08.00 - 10.00</td>
                                 </tr>
                             </table>
