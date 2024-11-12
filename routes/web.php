@@ -5,8 +5,10 @@ use App\Http\Controllers\Auth\UpdatePasswordController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JenjangController;
-use App\Http\Controllers\KelasController;
+use App\Http\Controllers\KelasMendatangController;
+use App\Http\Controllers\MasterKelasController;
 use App\Http\Controllers\MataKuliahController;
+use App\Http\Controllers\PeriodeController;
 use App\Http\Controllers\ProgramStudiController;
 
 /*
@@ -68,7 +70,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('mata_kuliah', MataKuliahController::class);
 
-    Route::resource('kelas', KelasController::class);
+    Route::resource('kelas_mendatang', KelasMendatangController::class);
+
+    Route::resource('periode', PeriodeController::class);
+
+    Route::resource('master_kelas', MasterKelasController::class);
 
     Route::post('/update_password', [UpdatePasswordController::class, 'update_password'])->name('update_password');
 });
