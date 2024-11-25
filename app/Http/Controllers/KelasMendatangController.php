@@ -7,14 +7,14 @@ use App\Models\ProgramStudi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class KelasController extends Controller
+class KelasMendatangController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('dashboard.kelas', [
+        return view('dashboard.kelas_mendatang', [
             'user' => Auth::user()
         ]);
     }
@@ -40,7 +40,7 @@ class KelasController extends Controller
      */
     public function show(string $id)
     {
-        return view('dashboard.lihat_kelas', [
+        return view('dashboard.lihat_kelas_mendatang', [
             'user' => Auth::user(),
             'mata_kuliah' => MataKuliah::all(),
             'program_studi' => ProgramStudi::all()

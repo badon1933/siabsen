@@ -82,7 +82,7 @@
                             </table>
                         </div> <!-- /.card-body -->
                         <div class="card-footer d-grid">
-                            <a href="{{ route('kelas.show', 1) }}" class="btn btn-primary">
+                            <a href="{{ route('kelas_mendatang.show', 1) }}" class="btn btn-primary">
                                 Lihat Kelas
                             </a>
                         </div> <!-- /.card-footer-->
