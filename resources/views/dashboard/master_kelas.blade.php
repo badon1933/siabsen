@@ -67,20 +67,39 @@
                 <input type="text" class="form-control" id="nama" name="nama">
                 <label for="nama">Nama Kelas</label>
             </div>
-            <x-input-select title="Periode" name="periode_id" :options="$periode" />
-            <x-input-select title="Program Studi" name="program_studi_id" :options="$program_studi" />
+            <x-input-select title="Periode" name="periode_id" :options="$periode" :custom="false" />
+            <x-input-select title="Program Studi" name="program_studi_id" :options="$program_studi" :custom="false" />
         </x-modal-form>
 
         {{-- Modal Edit Master Kelas --}}
-        @foreach ($master_kelas as $item)
-            <x-modal-form modal-id="editMasterKelas_{{ $item->id }}" modal-title="Edit Master Kelas" modal-type="form"
-                form-action="master_kelas.update" spoof-method="PATCH" params="{{ $item->id }}">
+        @foreach ($master_kelas as $mk)
+            <x-modal-form modal-id="editMasterKelas_{{ $mk->id }}" modal-title="Edit Master Kelas" modal-type="form"
+                form-action="master_kelas.update" spoof-method="PATCH" params="{{ $mk->id }}">
                 <div class="form-floating my-1">
-                    <input type="text" class="form-control" id="nama" name="nama" value="{{ $item->nama }}">
+                    <input type="text" class="form-control" id="nama" name="nama" value="{{ $mk->nama }}">
                     <label for="nama">Nama Kelas</label>
                 </div>
-                <x-input-select title="Periode" name="periode_id" :options="$periode" />
-                <x-input-select title="Program Studi" name="program_studi_id" :options="$program_studi" />
+                <div class="form-floating my-1">
+                    <select class="form-select" name="periode_id" id="periode_id">
+                        @foreach ($periode as $p)
+                            <option {{ $mk->periode->id == $p->id ? 'selected' : '' }} value="{{ $p->id }}">
+                                {{ $p->nama }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <label for="periode_id">Pilih Periode</label>
+                </div>
+                <div class="form-floating my-1">
+                    <select class="form-select" name="program_studi_id" id="program_studi_id">
+                        @foreach ($program_studi as $prodi)
+                            <option {{ $mk->program_studi->id == $prodi->id ? 'selected' : '' }}
+                                value="{{ $prodi->id }}">
+                                {{ $prodi->nama }}
+                            </option>
+                        @endforeach
+                    </select>
+                    <label for="program_studi_id">Pilih Program Studi</label>
+                </div>
             </x-modal-form>
         @endforeach
 

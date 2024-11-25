@@ -71,35 +71,27 @@
                 <input type="text" class="form-control" id="kode_prodi" name="kode_prodi">
                 <label for="kode_prodi">Kode prodi</label>
             </div>
-            <div class="form-floating my-1">
-                <select class="form-select" id="jenjang_id" name="jenjang_id" aria-label="Floating label select example">
-                    <option value="" style="display: none"></option>
-                    @foreach ($jenjang as $item)
-                        <option value="{{ $item->id }}">{{ $item->nama }}</option>
-                    @endforeach
-                </select>
-                <label for="jenjang">Pilih Jenjang</label>
-            </div>
+            <x-input-select title="Jenjang" name="jenjang_id" :options="$jenjang" :custom="false" />
         </x-modal-form>
 
         {{-- Modal Edit Prodi --}}
-        @foreach ($program_studi as $item)
-            <x-modal-form modal-id="editProdi_{{ $item->id }}" modal-title="Tambah Prodi" modal-type="form"
-                form-action="program_studi.update" spoof-method="PATCH" params="{{ $item->id }}">
+        @foreach ($program_studi as $p)
+            <x-modal-form modal-id="editProdi_{{ $p->id }}" modal-title="Tambah Prodi" modal-type="form"
+                form-action="program_studi.update" spoof-method="PATCH" params="{{ $p->id }}">
                 <div class="form-floating my-1">
-                    <input type="text" class="form-control" id="nama" name="nama" value="{{ $item->nama }}">
+                    <input type="text" class="form-control" id="nama" name="nama" value="{{ $p->nama }}">
                     <label for="nama">Nama prodi</label>
                 </div>
                 <div class="form-floating my-1">
                     <input type="text" class="form-control" id="kode_prodi" name="kode_prodi"
-                        value="{{ $item->kode_prodi }}">
+                        value="{{ $p->kode_prodi }}">
                     <label for="kode_prodi">Kode prodi</label>
                 </div>
                 <div class="form-floating my-1">
                     <select class="form-select" id="jenjang" name="jenjang" aria-label="Floating label select example">
-                        <option value="" style="display: none"></option>
-                        @foreach ($jenjang as $item)
-                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                        @foreach ($jenjang as $j)
+                            <option {{ $p->jenjang->id == $j->id ? 'selected' : '' }} value="{{ $j->id }}">
+                                {{ $j->nama }}</option>
                         @endforeach
                     </select>
                     <label for="jenjang">Pilih Jenjang</label>
