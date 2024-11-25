@@ -73,7 +73,7 @@ class JenjangController extends Controller
                 'nama' => $request->nama,
             ]);
 
-        return redirect()->route('jenjang.index');
+        return redirect()->route('jenjang.update');
     }
 
     /**
@@ -82,6 +82,6 @@ class JenjangController extends Controller
     public function destroy(string $id)
     {
         Jenjang::destroy($id);
-        return redirect()->route('jenjang.index');
+        return redirect()->route('jenjang.destroy');
     }
 }
