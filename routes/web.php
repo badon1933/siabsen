@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JenjangController;
 use App\Http\Controllers\KelasMendatangController;
+use App\Http\Controllers\KelasPerkuliahanController;
 use App\Http\Controllers\MasterKelasController;
 use App\Http\Controllers\MataKuliahController;
 use App\Http\Controllers\PeriodeController;
@@ -75,6 +76,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('periode', PeriodeController::class);
 
     Route::resource('master_kelas', MasterKelasController::class);
+
+    Route::resource('kelas_perkuliahan', KelasPerkuliahanController::class);
 
     Route::post('/update_password', [UpdatePasswordController::class, 'update_password'])->name('update_password');
 });
