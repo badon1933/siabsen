@@ -13,7 +13,10 @@
                 @method('delete')
                 @csrf
                 <div class="modal-body text-center">
-                    {{ $slot }}
+                    <p>Apakah anda yakin ingin menghapus data ini?</p>
+                    <small class="text-danger">
+                        Data yang sudah dihapus tidak dapat dikembalikan lagi.
+                    </small>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
