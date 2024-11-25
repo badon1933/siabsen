@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('absensis', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignUlid('jadwal_kuliah_id')->constrained();
+            $table->foreignUlid('mahasiswa_id')->constrained();
             $table->string('image')->nullable();
             $table->string('location')->nullable();
             $table->string('status');
