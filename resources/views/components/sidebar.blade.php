@@ -33,7 +33,7 @@
                             class="nav-icon bi bi-house-fill"></i>
                         <p>Dashboard</p>
                     </a> </li>
-                <li class="nav-item"> <a href="{{ route('kelas.index') }}" class="nav-link"> <i
+                <li class="nav-item"> <a href="{{ route('kelas_mendatang.index') }}" class="nav-link"> <i
                             class="nav-icon bi bi-calendar-week"></i>
                         <p>Kelas Mendatang</p>
                     </a> </li>
@@ -42,6 +42,10 @@
                         <p>Jadwal Kuliah</p>
                     </a> </li>
                 <li class="nav-header text-uppercase">Master Data</li>
+                <li class="nav-item"> <a href="{{ route('periode.index') }}" class="nav-link"> <i
+                            class="nav-icon bi bi-mortarboard-fill"></i>
+                        <p>Data Periode</p>
+                    </a> </li>
                 <li class="nav-item"> <a href="{{ route('jenjang.index') }}" class="nav-link"> <i
                             class="nav-icon bi bi-mortarboard-fill"></i>
                         <p>Data Jenjang</p>
@@ -54,9 +58,17 @@
                             class="nav-icon bi bi-journals"></i>
                         <p>Data Mata Kuliah</p>
                     </a> </li>
+                <li class="nav-item"> <a href="{{ route('master_kelas.index') }}" class="nav-link"> <i
+                            class="nav-icon bi bi-journals"></i>
+                        <p>Data Master Kelas</p>
+                    </a> </li>
                 <li class="nav-item"> <a href="{{ route('data_mahasiswa') }}" class="nav-link"> <i
                             class="nav-icon bi bi-people-fill"></i>
                         <p>Data Mahasiswa</p>
+                    </a> </li>
+                <li class="nav-item"> <a href="{{ route('kelas_perkuliahan.index') }}" class="nav-link"> <i
+                            class="nav-icon bi bi-people-fill"></i>
+                        <p>Data Kelas Perkuliahan</p>
                     </a> </li>
                 <li class="nav-header text-uppercase">Pengaturan Akun</li>
                 <li class="nav-item"> <a href="{{ route('pengaturan_akun') }}" class="nav-link"> <i
