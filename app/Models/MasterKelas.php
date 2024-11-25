@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class MasterKelas extends Model
 {
@@ -21,5 +22,10 @@ class MasterKelas extends Model
     public function periode(): BelongsTo
     {
         return $this->belongsTo(Periode::class);
+    }
+
+    public function kelas_perkuliahan(): HasMany
+    {
+        return $this->hasMany(KelasPerkuliahan::class);
     }
 }
