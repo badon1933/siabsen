@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\Auth\UpdatePasswordController;
+use App\Http\Controllers\DosenController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JenjangController;
@@ -78,6 +79,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('master_kelas', MasterKelasController::class);
 
     Route::resource('kelas_perkuliahan', KelasPerkuliahanController::class);
+    Route::resource('dosen', DosenController::class);
 
     Route::post('/update_password', [UpdatePasswordController::class, 'update_password'])->name('update_password');
 });
