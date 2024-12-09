@@ -66,7 +66,7 @@
                             class="nav-icon bi bi-people-fill"></i>
                         <p>Data Dosen</p>
                     </a> </li>
-                <li class="nav-item"> <a href="{{ route('data_mahasiswa') }}" class="nav-link"> <i
+                <li class="nav-item"> <a href="{{ route('mahasiswa.index') }}" class="nav-link"> <i
                             class="nav-icon bi bi-people-fill"></i>
                         <p>Data Mahasiswa</p>
                     </a> </li>

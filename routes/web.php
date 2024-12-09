@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JenjangController;
 use App\Http\Controllers\KelasMendatangController;
 use App\Http\Controllers\KelasPerkuliahanController;
+use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\MasterKelasController;
 use App\Http\Controllers\MataKuliahController;
 use App\Http\Controllers\PeriodeController;
@@ -52,13 +53,6 @@ Route::middleware(['auth'])->group(function () {
         ]);
     })->name('pengaturan_akun');
 
-
-    Route::get('/data_mahasiswa', function () {
-        return view('dashboard.data_mahasiswa', [
-            'user' => Auth::user()
-        ]);
-    })->name('data_mahasiswa');
-
     Route::resource('absen', AbsensiController::class);
 
     Route::resource('program_studi', ProgramStudiController::class)->except([
@@ -79,7 +73,10 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('master_kelas', MasterKelasController::class);
 
     Route::resource('kelas_perkuliahan', KelasPerkuliahanController::class);
+
     Route::resource('dosen', DosenController::class);
+
+    Route::resource('mahasiswa', MahasiswaController::class);
 
     Route::post('/update_password', [UpdatePasswordController::class, 'update_password'])->name('update_password');
 });
