@@ -28,4 +28,9 @@ class ProgramStudi extends Model
     {
         return $this->hasMany(MasterKelas::class);
     }
+
+    public function mahasiswa(): HasMany
+    {
+        return $this->hasMany(Mahasiswa::class);
+    }
 }

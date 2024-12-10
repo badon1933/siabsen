@@ -77,6 +77,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('dosen', DosenController::class);
 
     Route::resource('mahasiswa', MahasiswaController::class);
+    Route::post('/mahasiswa/import', [MahasiswaController::class, 'import'])->name('mahasiswa.import');
+    Route::get('/mahasiswa/export', [MahasiswaController::class, 'export'])->name('mahasiswa.export');
 
     Route::post('/update_password', [UpdatePasswordController::class, 'update_password'])->name('update_password');
 });

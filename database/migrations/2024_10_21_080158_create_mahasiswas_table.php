@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('mahasiswas', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->string('npm');
+            $table->string('npm')->unique();
             $table->string('nama_lengkap');
             $table->string('email');
-            $table->string('id_program_studi');
+            $table->foreignUlid('program_studi_id')->constrained();
             $table->timestamps();
         });
     }
