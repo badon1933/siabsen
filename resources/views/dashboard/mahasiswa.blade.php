@@ -156,7 +156,7 @@
         </div>
 
 
-        {{-- Modal Tambah Mahasiswa --}}
+        {{-- Modal Edit Mahasiswa --}}
         @foreach ($mahasiswa as $item)
             <x-modal-form modal-id="editMahasiswa_{{ $item->id }}" modal-title="Edit Mahasiswa" modal-type="form"
                 form-action="mahasiswa.update" spoof-method="PATCH" params="{{ $item->id }}">
