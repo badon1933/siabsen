@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\DosenImport;
 use App\Models\Dosen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DosenController extends Controller
 {
@@ -15,8 +17,18 @@ class DosenController extends Controller
     {
         return view('dashboard.dosen', [
             'user' => Auth::user(),
-            'dosen' => Dosen::paginate(10),
+            'dosen' => Dosen::orderByDesc('updated_at')->paginate(10),
         ]);
+    }
+
+    /**
+     * Import a newly created resource.
+     */
+    public function import()
+    {
+        Excel::import(new DosenImport, request()->file('import_dosen'));
+
+        return redirect()->route('dosen.index')->with('success', 'Data Dosen berhasil diimport!');
     }
 
     /**
@@ -34,12 +46,14 @@ class DosenController extends Controller
     {
         $request->validate([
             'nama' => 'required',
-            'nidn' => 'required',
+            'nidn' => 'required|unique:dosens',
+            'email' => 'required',
         ]);
 
         Dosen::create([
             'nama' => $request->nama,
             'nidn' => $request->nidn,
+            'email' => $request->email,
         ]);
 
         return redirect()->route('dosen.index');
@@ -66,7 +80,20 @@ class DosenController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'nidn' => 'required|unique:dosens',
+            'email' => 'required',
+        ]);
+
+        Dosen::where(['id' => $id])
+            ->update([
+                'nama' => $request->nama,
+                'nidn' => $request->nidn,
+                'email' => $request->email,
+            ]);
+
+        return redirect()->route('dosen.index');
     }
 
     /**
@@ -75,6 +102,6 @@ class DosenController extends Controller
     public function destroy(string $id)
     {
         Dosen::destroy($id);
-        return redirect()->route('dosen.destroy');
+        return redirect()->route('dosen.index');
     }
 }

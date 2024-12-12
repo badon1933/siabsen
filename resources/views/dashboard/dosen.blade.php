@@ -46,16 +46,14 @@
                                                         data-bs-title="Detail Dosen">
                                                         <i class="bi bi-info-circle"></i>
                                                     </a href="#">
-                                                    <a href="#" class="badge text-bg-warning d-inline-block"
-                                                        data-bs-toggle="tooltip" data-bs-placement="top"
-                                                        data-bs-title="Edit Dosen">
+                                                    <x-modal-trigger type="badge" color="warning"
+                                                        target-modal="editDosen_{{ $item->id }}">
                                                         <i class="bi bi-pencil-square"></i>
-                                                    </a href="#">
-                                                    <a href="#" class="badge text-bg-danger d-inline-block"
-                                                        data-bs-toggle="tooltip" data-bs-placement="top"
-                                                        data-bs-title="Hapus ahasiswa">
+                                                    </x-modal-trigger>
+                                                    <x-modal-trigger type="badge" color="danger"
+                                                        target-modal="deleteDosen_{{ $item->id }}">
                                                         <i class="bi bi-trash-fill"></i>
-                                                    </a href="#">
+                                                    </x-modal-trigger>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -80,18 +78,69 @@
                 <input type="text" class="form-control" id="nama" name="nama">
                 <label for="nama">Nama Dosen</label>
             </div>
+            <div class="form-floating my-1">
+                <input type="email" class="form-control" id="email" name="email">
+                <label for="email">Email</label>
+            </div>
         </x-modal-form>
 
         {{-- Modal Import Dosen --}}
-        <x-modal-form modal-id="importDosenModal" modal-title="Import Dosen" modal-type="form" form-action="dosen.store"
-            spoof-method="" params="">
-            <div class="my-1">
-                <input class="form-control" type="file" id="importDosen" name="importDosen">
+        <div class="modal fade" id="importDosenModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="importDosenModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="importDosenModalLabel">Import Dosen</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ route('dosen.import') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="my-1">
+                                <input class="form-control" type="file" id="import_dosen" name="import_dosen">
+                            </div>
+                            <a href="{{ Storage::url('import_dosen.xlsx') }}"
+                                class="badge text-bg-success d-inline-block text-decoration-none">
+                                <i class="bi bi-download"></i>
+                                Download Format
+                            </a>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <a href="#" class="badge text-bg-success d-inline-block text-decoration-none">
-                Download Format
-            </a>
-        </x-modal-form>
+        </div>
+
+        {{-- Modal Edit Dosen --}}
+        @foreach ($dosen as $item)
+            <x-modal-form modal-id="editDosen_{{ $item->id }}" modal-title="Edit Dosen" modal-type="form"
+                form-action="dosen.update" spoof-method="PATCH" params="{{ $item->id }}">
+                <div class="form-floating my-1">
+                    <input type="text" class="form-control" id="nama" name="nama"
+                        value="{{ $item->nama }}">
+                    <label for="nama">Nama Lengkap (Tanpa Gelar)</label>
+                </div>
+                <div class="form-floating my-1">
+                    <input type="text" class="form-control" id="nidn" name="nidn"
+                        value="{{ $item->nidn }}">
+                    <label for="nidn">NIDN</label>
+                </div>
+                <div class="form-floating my-1">
+                    <input type="text" class="form-control" id="email" name="email"
+                        value="{{ $item->email }}">
+                    <label for="email">Email</label>
+                </div>
+            </x-modal-form>
+        @endforeach
+
+        {{-- Modal Delete Dosen --}}
+        @foreach ($dosen as $item)
+            <x-modal-deletion modal-id="deleteDosen_{{ $item->id }}" form-action="dosen.destroy"
+                param="{{ $item->id }}" />
+        @endforeach
 
     </div> <!--end::App Content-->
 @endsection
