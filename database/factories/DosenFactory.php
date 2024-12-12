@@ -19,6 +19,7 @@ class DosenFactory extends Factory
         return [
             'nama' => fake()->name(),
             'nidn' => fake()->randomNumber(9),
+            'email' => fake()->email(),
         ];
     }
 }

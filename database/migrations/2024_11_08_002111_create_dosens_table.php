@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('dosens', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->integer('nidn');
+            $table->integer('nidn')->unique();
             $table->string('nama');
+            $table->string('email');
             $table->timestamps();
         });
     }
