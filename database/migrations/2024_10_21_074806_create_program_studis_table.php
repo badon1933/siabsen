@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('program_studis', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('nama');
-            $table->integer('kode_prodi')->unique();
+            $table->unsignedBigInteger('kode_prodi')->index();
             $table->foreignUlid('jenjang_id')->constrained();
             $table->timestamps();
         });

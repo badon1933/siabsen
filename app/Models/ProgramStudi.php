@@ -21,7 +21,7 @@ class ProgramStudi extends Model
 
     public function mata_kuliah(): HasMany
     {
-        return $this->hasMany(MataKuliah::class);
+        return $this->hasMany(MataKuliah::class, 'kode_prodi');
     }
 
     public function master_kelas(): HasMany

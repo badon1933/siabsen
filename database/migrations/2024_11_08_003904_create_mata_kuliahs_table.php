@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('mata_kuliahs', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('nama');
-            $table->string('kode_matkul');
-            $table->foreignUlid('program_studi_id')->constrained();
+            $table->string('kode_matkul')->unique();
+            $table->unsignedBigInteger('kode_prodi');
+            $table->foreign('kode_prodi')->references('kode_prodi')->on('program_studis');
             $table->timestamps();
         });
     }

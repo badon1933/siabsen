@@ -16,7 +16,7 @@ class MataKuliah extends Model
 
     public function program_studi(): BelongsTo
     {
-        return $this->belongsTo(ProgramStudi::class);
+        return $this->belongsTo(ProgramStudi::class, 'kode_prodi', 'kode_prodi');
     }
 
     public function kelas_perkuliahan(): HasMany
