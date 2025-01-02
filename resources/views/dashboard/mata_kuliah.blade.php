@@ -7,6 +7,11 @@
         <div class="container-fluid"> <!--begin::Row-->
             <div class="row">
                 <div class="col-12"> <!-- Default box -->
+                    @if (session('success'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('success') }}
+                        </div>
+                    @endif
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Data Mata Kuliah</h3>
@@ -14,6 +19,10 @@
                                 <x-modal-button type="button" btn-type="primary" target-modal="tambahMatkulModal">
                                     <i class="bi bi-plus-square fs-6"></i>
                                     Tambah Mata Kuliah
+                                </x-modal-button>
+                                <x-modal-button type="button" btn-type="success" target-modal="importMatkulModal">
+                                    <i class="bi bi-file-earmark-plus fs-6"></i>
+                                    Import Mata Kuliah
                                 </x-modal-button>
                             </div>
                         </div>
@@ -33,10 +42,7 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $item->nama }}</td>
                                                 <td>{{ $item->kode_matkul }}</td>
-                                                <td>
-                                                    {{ $item->program_studi->jenjang->nama }} -
-                                                    {{ $item->program_studi->nama }}
-                                                </td>
+                                                <td>{{ $item->program_studi->nama }}</td>
                                                 <td>
                                                     <a href="#" class="badge text-bg-info d-inline-block"
                                                         data-bs-toggle="tooltip" data-bs-placement="top"
@@ -74,15 +80,74 @@
                 <input type="text" class="form-control" id="kode_matkul" name="kode_matkul">
                 <label for="kode_matkul">Kode Mata Kuliah</label>
             </div>
-            <x-input-select title="Program Studi" name="program_studi_id" :options="$program_studi" :custom="false" />
+            <x-input-select title="Program Studi" name="kode_prodi" :options="$program_studi" :custom="true">
+                <option selected style="display: none">Pilih salah satu Program Studi</option>
+                @foreach ($program_studi as $item)
+                    <option value="{{ $item->kode_prodi }}">{{ $item->nama }}</option>
+                @endforeach
+            </x-input-select>
         </x-modal-form>
+
+        {{-- Modal Import Mata Kuliah --}}
+        <div class="modal fade" id="importMatkulModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="importMatkulModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="importMatkulModalLabel">Import Mata Kuliah</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ route('mata_kuliah.import') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="my-1">
+                                <input class="form-control" type="file" id="import_mata_kuliah"
+                                    name="import_mata_kuliah">
+                            </div>
+                            <a href="{{ Storage::url('import_mata_kuliah.xlsx') }}"
+                                class="badge text-bg-success d-inline-block text-decoration-none">
+                                <i class="bi bi-download"></i>
+                                Download Format
+                            </a>
+                            <a class="badge text-bg-primary d-inline-block text-decoration-none" data-bs-toggle="collapse"
+                                href="#collapseKodeProdi" role="button" aria-expanded="false"
+                                aria-controls="collapseExample">
+                                <i class="bi bi-eye"></i>
+                                Kode Program Studi
+                            </a>
+                            <x-collapse id="collapseKodeProdi">
+                                <table class="table table-bordered table-hover table-striped">
+                                    <thead>
+                                        <th>Kode Prodi</th>
+                                        <th>Program Studi</th>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($program_studi as $item)
+                                            <tr>
+                                                <td>{{ $item->kode_prodi }}</td>
+                                                <td>{{ $item->nama }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </x-collapse>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
         {{-- Modal Edit matkul --}}
         @foreach ($mata_kuliah as $mk)
             <x-modal-form modal-id="editMatkul_{{ $mk->id }}" modal-title="Edit Mata Kuliah" modal-type="form"
                 form-action="mata_kuliah.update" spoof-method="PATCH" params="{{ $mk->id }}">
                 <div class="form-floating my-1">
-                    <input type="text" class="form-control" id="nama" name="nama" value="{{ $mk->nama }}">
+                    <input type="text" class="form-control" id="nama" name="nama"
+                        value="{{ $mk->nama }}">
                     <label for="nama">Nama Mata Kuliah</label>
                 </div>
                 <div class="form-floating my-1">
@@ -90,17 +155,13 @@
                         value="{{ $mk->kode_matkul }}">
                     <label for="kode_matkul">Kode Mata Kuliah</label>
                 </div>
-                <div class="form-floating my-1">
-                    <select class="form-select" id="program_studi_id" name="program_studi_id"
-                        aria-label="Floating label select example">
-                        @foreach ($program_studi as $p)
-                            <option {{ $mk->program_studi->id == $p->id ? 'selected' : '' }} value="{{ $p->id }}">
-                                {{ $p->jenjang->nama }} - {{ $p->nama }}
-                            </option>
-                        @endforeach
-                    </select>
-                    <label for="program_studi_id">Pilih Program Studi</label>
-                </div>
+                <x-input-select title="Program Studi" name="kode_prodi" :options="$program_studi" :custom="true">
+                    <option selected style="display: none">Pilih salah satu Program Studi</option>
+                    @foreach ($program_studi as $item)
+                        <option {{ $item->kode_prodi == $mk->kode_prodi ? 'selected' : '' }}
+                            value="{{ $item->kode_prodi }}">{{ $item->nama }}</option>
+                    @endforeach
+                </x-input-select>
             </x-modal-form>
         @endforeach
 

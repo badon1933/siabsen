@@ -65,6 +65,7 @@ Route::middleware(['auth'])->group(function () {
     ]);
 
     Route::resource('mata_kuliah', MataKuliahController::class);
+    Route::post('/mata_kuliah/import', [MataKuliahController::class, 'import'])->name('mata_kuliah.import');
 
     Route::resource('kelas_mendatang', KelasMendatangController::class);
 

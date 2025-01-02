@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\MataKuliah;
 use App\Models\ProgramStudi;
 use Illuminate\Http\Request;
+use App\Imports\MataKuliahImport;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MataKuliahController extends Controller
 {
@@ -19,6 +21,16 @@ class MataKuliahController extends Controller
             'mata_kuliah' => MataKuliah::all(),
             'program_studi' => ProgramStudi::all(),
         ]);
+    }
+
+    /**
+     * Import a newly created resource.
+     */
+    public function import()
+    {
+        Excel::import(new MataKuliahImport, request()->file('import_mata_kuliah'));
+
+        return redirect()->route('mata_kuliah.index')->with('success', 'Data Mata Kuliah berhasil diimport!');
     }
 
     /**
@@ -37,13 +49,13 @@ class MataKuliahController extends Controller
         $request->validate([
             'nama' => 'required',
             'kode_matkul' => 'required',
-            'program_studi_id' => 'required'
+            'kode_prodi' => 'required'
         ]);
 
         MataKuliah::create([
             'nama' => $request->nama,
             'kode_matkul' => $request->kode_matkul,
-            'program_studi_id' => $request->program_studi_id,
+            'kode_prodi' => $request->kode_prodi,
         ]);
 
         return redirect()->route('mata_kuliah.index');
@@ -73,14 +85,14 @@ class MataKuliahController extends Controller
         $request->validate([
             'nama' => 'required',
             'kode_matkul' => 'required',
-            'program_studi_id' => 'required'
+            'kode_prodi' => 'required'
         ]);
 
         MataKuliah::where(['id' => $id])
             ->update([
                 'nama' => $request->nama,
                 'kode_matkul' => $request->kode_matkul,
-                'program_studi_id' => $request->program_studi_id,
+                'kode_prodi' => $request->kode_prodi,
             ]);
 
         return redirect()->route('mata_kuliah.index');
