@@ -19,7 +19,7 @@ class ProgramStudiFactory extends Factory
     {
         return [
             'nama' => "Teknologi Industri",
-            'kode_prodi' => fake()->randomNumber(5),
+            'kode_prodi' => 33301,
             'jenjang_id' => Jenjang::all()->random()->id,
         ];
     }

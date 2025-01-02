@@ -20,8 +20,8 @@ class MataKuliahFactory extends Factory
     {
         return [
             'nama' => "AMDAL",
-            'kode_matkul' => fake()->randomNumber(),
-            'program_studi_id' => ProgramStudi::all()->random()->id,
+            'kode_matkul' => 11011,
+            'kode_prodi' => ProgramStudi::all()->random()->kode_prodi,
         ];
     }
 }
